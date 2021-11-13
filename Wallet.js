@@ -1,4 +1,4 @@
-const {createHash, createECDH, createSign, createVerify} = require('crypto');
+const { createECDH } = require('crypto');
 
 
 class Wallet {
@@ -19,7 +19,7 @@ class Wallet {
 
     static getNodePrivateKey(user, key) {
         const t = '308184020100301006072a8648ce3d020106052b8104000a046d306b0201010420';
-        const k = Buffer.from(t + user + 'a144034200' + key, 'hex').toString('base64');
+        const k = Buffer.from(t + key + 'a144034200' + user, 'hex').toString('base64');
         return `-----BEGIN PRIVATE KEY-----\n${k}\n-----END PRIVATE KEY-----`;
     }
 
@@ -29,3 +29,5 @@ class Wallet {
         return `-----BEGIN PUBLIC KEY-----\n${k}\n-----END PUBLIC KEY-----`;
     }
 }
+
+module.exports.Wallet = Wallet;
